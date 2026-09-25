@@ -480,11 +480,11 @@ db.graph_delete_node("globex", namespace="kb")
 
 ## Status
 
-**v0.5.0 (current)** — adds **office-document ingestion** (Docx/Pptx/Xlsx), a **Hugging Face Inference embedder**, a **DSPy retrieval integration**, opt-in **structured JSON logging** (with secret redaction), **ProductQuantizer save/load**, dashboard **dark mode**, and **vectorized MMR** reranking — on top of the v0.4 in-memory hot tier and the v0.1 hybrid core.
+**v0.6.0 (current)** — adds **query-expansion retrievers** (Multi-Query + HyDE), **learned RRF fusion weights**, **OPQ + scalar quantization**, **cross-encoder reranking**, **hybrid graph+ANN search** and graph shortest-path, **`search().explain()`**, **cache invalidation on write**, an **embedding cache**, **`S3Source`** ingestion, DynamoDB **gzip** for large text, LlamaIndex **metadata-filter translation**, an **OpenAI Assistants** tool, and CLI **namespace export/import** — on top of the v0.5 feature set and the v0.1 hybrid core.
 
 See the full history in **[CHANGELOG.md](CHANGELOG.md)**, the browsable **[Release notes](https://codeforstartups.github.io/dynavec/docs/release-notes.html)** page, or the **[GitHub Releases](https://github.com/codeforstartups/dynavec/releases)** tab.
 
-**Roadmap (v0.6):** optional `hnswlib`/`faiss` hot-tier backend for very large hot sets, sparse/BM25 hybrid computed from DynamoDB, and OPQ (rotated product quantization).
+**Roadmap (v0.7):** native async client (`AsyncDynavec` on aioboto3), optional `hnswlib`/`faiss` hot-tier backend, and sparse/BM25 hybrid computed from DynamoDB.
 
 ## Publishing (maintainers)
 
