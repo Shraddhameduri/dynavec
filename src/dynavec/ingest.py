@@ -16,6 +16,7 @@ consumes it. Tools and prompts primitives can be adapted the same way.
 
 from __future__ import annotations
 
+import datetime
 import hashlib
 from collections.abc import Iterable, Iterator
 from dataclasses import dataclass, field
