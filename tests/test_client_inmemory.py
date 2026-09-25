@@ -233,6 +233,27 @@ def test_search_without_explain_returns_results_list(db):
     assert len(result) == 1
 
 
+def test_graph_shortest_path_respects_hop_cap(db):
+    db.graph_add_edge("a", "related_to", "b")
+    db.graph_add_edge("b", "related_to", "c")
+    db.graph_add_edge("c", "related_to", "d")
+
+    assert db.graph_shortest_path("a", "d", hops=2) == []
+
+def test_graph_shortest_path_returns_minimum_hops(db):
+    db.graph_add_edge("a", "related_to", "c")
+    db.graph_add_edge("c", "related_to", "e")
+    db.graph_add_edge("e", "related_to", "d")
+
+    db.graph_add_edge("a", "related_to", "b")
+    db.graph_add_edge("b", "related_to", "d")
+
+    assert db.graph_shortest_path("a", "d", hops=3) == [
+        "a",
+        "b",
+        "d",
+    ]
+
 def test_search_explain_handles_empty_results(db):
     result = db.search("missing", explain=True)
 

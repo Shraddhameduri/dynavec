@@ -982,7 +982,53 @@ class Dynavec:
             if not frontier:
                 break
         return [e for e in visited if e != entity_id]
+    def graph_shortest_path(
+        self,
+        src_entity_id,
+        dst_entity_id,
+        *,
+        namespace="default",
+        relation=None,
+        hops=10,
+    ):
+        # Use BFS to find the shortest path between two graph entities
+        # within the given hop limit.
+        # Returns the path if the destination is reachable; otherwise returns an empty list.
 
+        if src_entity_id == dst_entity_id:
+            return [src_entity_id]
+
+        visited = {src_entity_id}
+        frontier = [src_entity_id]
+
+        shortest_path_for_node = {
+            src_entity_id: [src_entity_id]
+        }
+
+        for _ in range(hops):
+            nxt = []
+
+            for node in frontier:
+                for nb in self.graph.neighbors(namespace, node, relation):
+                    if nb in visited:
+                        continue
+
+                    visited.add(nb)
+                    nxt.append(nb)
+
+                    shortest_path_for_node[nb] = (
+                        shortest_path_for_node[node] + [nb]
+                    )
+
+                    if nb == dst_entity_id:
+                        return shortest_path_for_node[nb]
+
+            frontier = nxt
+
+            if not frontier:
+                break
+
+        return []
     def graph_search(
         self,
         query: str | None = None,
